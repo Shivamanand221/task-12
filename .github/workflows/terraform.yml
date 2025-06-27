@@ -21,8 +21,8 @@ jobs:
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::<your-account-id>:role/<your-role-name>
-          aws-region: ap-south-1
+          role-to-assume: arn:aws:iam::905418306932:role/GitHubActionsECRRole
+          aws-region: us-east-1
 
       - name: Extract Git Commit SHA
         id: vars
@@ -30,8 +30,8 @@ jobs:
 
       - name: Login to Amazon ECR
         run: |
-          aws ecr get-login-password --region ap-south-1 | \
-          docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.ap-south-1.amazonaws.com
+          aws ecr get-login-password --region us-east-1 | \
+          docker login --username AWS --password-stdin 905418306932.dkr.ecr.us-east-1.amazonaws.com
 
       - name: Build Docker image
         run: |
@@ -39,8 +39,8 @@ jobs:
 
       - name: Tag Docker image
         run: |
-          docker tag strapi-app:$SHA <your-account-id>.dkr.ecr.ap-south-1.amazonaws.com/<your-ecr-repo>:$SHA
+          docker tag strapi-app:$SHA 905418306932.dkr.ecr.us-east-1.amazonaws.com/my-strapi-app:$SHA
 
       - name: Push to Amazon ECR
         run: |
-          docker push <your-account-id>.dkr.ecr.ap-south-1.amazonaws.com/<your-ecr-repo>:$SHA
+          docker push 905418306932.dkr.ecr.us-east-1.amazonaws.com/my-strapi-app:$SHA
