@@ -6,6 +6,7 @@ services:
       context: .
     container_name: strapi_app
     environment:
+      NODE_ENV: development
       DATABASE_CLIENT: postgres
       DATABASE_NAME: strapi
       DATABASE_HOST: strapi_postgres

@@ -7,6 +7,8 @@ WORKDIR /app
 # Copy app files
 COPY . .
 
+ENV NODE_ENV=development
+
 # Install dependencies
 RUN npm install
 
@@ -18,3 +20,4 @@ EXPOSE 1337
 
 # Start the app
 CMD ["npm", "start"]
+
